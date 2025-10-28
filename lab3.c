@@ -19,9 +19,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int n = argc - 1;         // количество введённых чисел
-    int numbers[n];           // создаём массив нужного размера
-
+    int n = argc - 1;
+    int numbers[n];
     for (int i = 0; i < n; i++) {
         numbers[i] = atoi(argv[i + 1]);
     }
