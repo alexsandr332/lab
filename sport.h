@@ -28,5 +28,7 @@ void show_all(MatchDB* db);
 int delete_match(MatchDB* db, int id);
 void save_db(MatchDB* db);
 void load_db(MatchDB* db);
+void search_team(MatchDB* db);
+void search_place(MatchDB* db);
 
 #endif
