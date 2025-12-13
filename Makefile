@@ -16,3 +16,5 @@ clean:
 
 run: $(TARGET)
 	./$(TARGET)
+
+rebuild: clean all
