@@ -54,15 +54,17 @@ int add_match(MatchDB* db) {
 }
 
 void show_all(MatchDB* db) {
-    printf("\nВсе матчи (%d):\n", db->count);
+    printf("\n=== ВСЕ МАТЧИ (%d) ===\n", db->count);
     for (int i = 0; i < db->count; i++) {
-        printf("%d. %s - %s %d:%d [%s]\n", 
+        printf("%d. %s - %s %d:%d [%s] зрители:%d цена:%.2f\n", 
                db->data[i].id,
                db->data[i].team1,
                db->data[i].team2,
                db->data[i].score1,
                db->data[i].score2,
-               db->data[i].place);
+               db->data[i].place,
+               db->data[i].viewers,
+               db->data[i].cost);
     }
 }
 
@@ -110,4 +112,38 @@ void load_db(MatchDB* db) {
     db->next_id = next_id;
     
     fclose(f);
+}
+
+void search_team(MatchDB* db) {
+    char name[NAME_LEN];
+    printf("Название команды: ");
+    fgets(name, NAME_LEN, stdin);
+    name[strcspn(name, "\n")] = 0;
+    
+    printf("\n=== РЕЗУЛЬТАТЫ ПОИСКА ===\n");
+    int found = 0;
+    for (int i = 0; i < db->count; i++) {
+        if (strstr(db->data[i].team1, name) || strstr(db->data[i].team2, name)) {
+            printf("%d. %s - %s\n", db->data[i].id, db->data[i].team1, db->data[i].team2);
+            found = 1;
+        }
+    }
+    if (!found) printf("Не найдено\n");
+}
+
+void search_place(MatchDB* db) {
+    char place[NAME_LEN];
+    printf("Место проведения: ");
+    fgets(place, NAME_LEN, stdin);
+    place[strcspn(place, "\n")] = 0;
+    
+    printf("\n=== РЕЗУЛЬТАТЫ ПОИСКА ===\n");
+    int found = 0;
+    for (int i = 0; i < db->count; i++) {
+        if (strstr(db->data[i].place, place)) {
+            printf("%d. %s - %s в %s\n", db->data[i].id, db->data[i].team1, db->data[i].team2, db->data[i].place);
+            found = 1;
+        }
+    }
+    if (!found) printf("Не найдено\n");
 }
