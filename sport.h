@@ -21,10 +21,9 @@ typedef struct {
     int next_id;
 } MatchDB;
 
-// ФУНКЦИИ
 MatchDB* create_db();
 void free_db(MatchDB* db);
-void inputMatch(Match* m);          // ← ДОБАВЬТЕ ЭТУ СТРОКУ
+void inputMatch(Match* m);
 int add_match(MatchDB* db);
 void show_all(MatchDB* db);
 int delete_match(MatchDB* db, int id);
