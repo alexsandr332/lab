@@ -1,0 +1,21 @@
+# Makefile
+CC = g++
+CFLAGS = -Wall -Wextra -std=c++11
+TARGET = sport_db
+OBJ = sport.o main.o
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.cpp sport.h
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	rm -f $(OBJ) $(TARGET) sport.dat
+
+run: $(TARGET)
+	./$(TARGET)
+
+rebuild: clean all
