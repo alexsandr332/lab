@@ -1,16 +1,19 @@
 # Makefile
-CC = g++
-CFLAGS = -Wall -Wextra -std=c++11
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11
 TARGET = sport_db
 OBJ = sport.o main.o
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp sport.h
-	$(CC) $(CFLAGS) -c $<
+sport.o: sport.cpp sport2.h
+	$(CXX) $(CXXFLAGS) -c sport.cpp -o sport.o
+
+main.o: main.cpp sport2.h
+	$(CXX) $(CXXFLAGS) -c main.cpp -o main.o
 
 clean:
 	rm -f $(OBJ) $(TARGET) sport.dat
@@ -19,3 +22,5 @@ run: $(TARGET)
 	./$(TARGET)
 
 rebuild: clean all
+
+.PHONY: all clean run rebuild
