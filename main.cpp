@@ -1,5 +1,4 @@
-// main.cpp
-#include "sport.h"
+#include "sport2.h"
 #include <iostream>
 #include <limits>
 
