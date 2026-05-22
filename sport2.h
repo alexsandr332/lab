@@ -1,11 +1,8 @@
-// sport.h
 #ifndef SPORT_H
 #define SPORT_H
 
 #include <string>
 #include <vector>
-
-#define NAME_LEN 30
 
 struct Match {
     int id;
