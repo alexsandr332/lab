@@ -1,5 +1,5 @@
-#ifndef SPORT_H
-#define SPORT_H
+#ifndef SPORT2_H
+#define SPORT2_H
 
 #include <string>
 #include <vector>
