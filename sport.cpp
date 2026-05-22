@@ -1,4 +1,3 @@
-// sport.cpp
 #include "sport.h"
 #include <iostream>
 #include <fstream>
@@ -18,8 +17,14 @@ void MatchDB::inputMatch(Match& m) {
     std::cout << "Место: ";
     std::getline(std::cin, m.place);
     
-    std::cout << "Счет1 Счет2 Зрители Цена: ";
-    std::cin >> m.score1 >> m.score2 >> m.viewers >> m.cost;
+    std::cout << "Счет1: ";
+    std::cin >> m.score1;
+    std::cout << "Счет2: ";
+    std::cin >> m.score2;
+    std::cout << "Зрители: ";
+    std::cin >> m.viewers;
+    std::cout << "Цена: ";
+    std::cin >> m.cost;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
@@ -53,7 +58,10 @@ bool MatchDB::delete_match(int id) {
 
 void MatchDB::save_db() const {
     std::ofstream f("sport.dat", std::ios::binary);
-    if (!f) return;
+    if (!f) {
+        std::cerr << "Ошибка открытия файла для записи!\n";
+        return;
+    }
     
     int count = data.size();
     f.write(reinterpret_cast<const char*>(&count), sizeof(int));
@@ -83,7 +91,10 @@ void MatchDB::save_db() const {
 
 void MatchDB::load_db() {
     std::ifstream f("sport.dat", std::ios::binary);
-    if (!f) return;
+    if (!f) {
+        std::cerr << "Файл sport.dat не найден!\n";
+        return;
+    }
     
     int count, loaded_next_id;
     f.read(reinterpret_cast<char*>(&count), sizeof(int));
