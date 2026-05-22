@@ -1,8 +1,8 @@
-#include "sport.h"
+#include "sport2.h"
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <cstring>
+#include <string>
 #include <limits>
 
 MatchDB::MatchDB() : next_id(1) {}
@@ -148,7 +148,8 @@ void MatchDB::search_team() const {
     for (const auto& m : data) {
         if (m.team1.find(name) != std::string::npos || 
             m.team2.find(name) != std::string::npos) {
-            std::cout << m.id << ". " << m.team1 << " - " << m.team2 << "\n";
+            std::cout << m.id << ". " << m.team1 << " - " << m.team2 
+                      << " " << m.score1 << ":" << m.score2 << "\n";
             found = true;
         }
     }
