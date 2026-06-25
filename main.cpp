@@ -1,6 +1,7 @@
 #include "sport2.h"
 #include <iostream>
 #include <limits>
+#include <string>
 
 void show_menu() {
     std::cout << "\n=== СПОРТИВНАЯ БАЗА ДАННЫХ ===\n";
@@ -15,8 +16,23 @@ void show_menu() {
     std::cout << "Выберите действие: ";
 }
 
-int main() {
-    MatchDB db;
+int main(int argc, char* argv[]) {
+    std::string filename;
+    
+    if (argc >= 2) {
+        filename = argv[1];
+        std::cout << "Используется файл базы данных: " << filename << "\n";
+    } else {
+        std::cout << "Введите имя файла базы данных (по умолчанию sport.dat): ";
+        std::getline(std::cin, filename);
+        if (filename.empty()) {
+            filename = "sport.dat";
+        }
+    }
+    
+    MatchDB db(filename);
+    db.load_db();
+    
     int choice, id;
     
     do {
@@ -46,12 +62,12 @@ int main() {
                 
             case 4:
                 db.save_db();
-                std::cout << "Сохранено в sport.dat\n";
+                std::cout << "Сохранено в " << filename << "\n";
                 break;
                 
             case 5:
                 db.load_db();
-                std::cout << "Загружено из sport.dat\n";
+                std::cout << "Загружено из " << filename << "\n";
                 break;
                 
             case 6:
