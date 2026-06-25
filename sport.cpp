@@ -51,8 +51,10 @@ void MatchDB::resize() {
     int new_capacity = (capacity == 0) ? 2 : capacity * 2;
     Match* new_data = new Match[new_capacity];
     
-    for (int i = 0; i < size; ++i) {
-        new_data[i] = data[i];
+    if (data != nullptr) {
+        for (int i = 0; i < size; ++i) {
+            new_data[i] = data[i];
+        }
     }
     
     delete[] data;
