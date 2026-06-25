@@ -1,4 +1,3 @@
-# Makefile
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11
 TARGET = sport_db
@@ -16,11 +15,14 @@ main.o: main.cpp sport2.h
 	$(CXX) $(CXXFLAGS) -c main.cpp -o main.o
 
 clean:
-	rm -f $(OBJ) $(TARGET) sport.dat
+	rm -f $(OBJ) $(TARGET) *.dat
 
 run: $(TARGET)
 	./$(TARGET)
 
+run_with_file: $(TARGET)
+	./$(TARGET) my_database.dat
+
 rebuild: clean all
 
-.PHONY: all clean run rebuild
+.PHONY: all clean run run_with_file rebuild
