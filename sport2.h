@@ -2,7 +2,7 @@
 #define SPORT2_H
 
 #include <string>
-#include <vector>
+#include <cstring>
 
 struct Match {
     int id;
@@ -17,11 +17,20 @@ struct Match {
 
 class MatchDB {
 private:
-    std::vector<Match> data;
+    Match* data;
+    int capacity;
+    int size;
     int next_id;
+    std::string filename;
+
+    void resize();
 
 public:
     MatchDB();
+    explicit MatchDB(const std::string& fname);
+    MatchDB(const MatchDB& other);
+    MatchDB& operator=(const MatchDB& other);
+    ~MatchDB();
     
     void inputMatch(Match& m);
     bool add_match();
@@ -32,7 +41,8 @@ public:
     void search_team() const;
     void search_place() const;
     
-    int get_count() const { return data.size(); }
+    int get_count() const { return size; }
+    void set_filename(const std::string& fname) { filename = fname; }
 };
 
 #endif
